@@ -5,161 +5,144 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #f5f5f5;
-  color: #333;
+  font-family: system-ui, sans-serif;
+  background: #fafafa;
+  color: #222;
+  line-height: 1.6;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 16px;
 }
 
+/* Header */
 .header {
-  background-color: #2c3e50;
+  background: #2c3e50;
   color: white;
-  padding: 20px 0;
+  padding: 20px;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+  font-size: 2rem;
+  margin-bottom: 6px;
 }
 
 .header p {
-  font-size: 1.1rem;
-  opacity: 0.9;
+  font-size: 1rem;
+  opacity: 0.85;
 }
 
+/* Card */
 .card {
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-bottom: 20px;
-  transition: transform 0.2s ease;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 16px;
 }
 
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-
+/* Buttons */
 .btn {
-  background-color: #3498db;
+  background: #3498db;
   color: white;
   border: none;
-  padding: 12px 24px;
-  border-radius: 6px;
+  padding: 10px 18px;
+  border-radius: 4px;
+  font-size: 15px;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
 }
 
 .btn:hover {
-  background-color: #2980b9;
+  background: #2980b9;
 }
 
 .btn-secondary {
-  background-color: #95a5a6;
+  background: #95a5a6;
 }
 
 .btn-secondary:hover {
-  background-color: #7f8c8d;
+  background: #7f8c8d;
 }
 
 .btn-success {
-  background-color: #27ae60;
+  background: #27ae60;
 }
 
 .btn-success:hover {
-  background-color: #229954;
+  background: #229954;
 }
 
+/* Forms */
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: #555;
+  margin-bottom: 6px;
+  font-weight: 500;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
   width: 100%;
-  padding: 12px;
-  border: 2px solid #ddd;
-  border-radius: 6px;
-  font-size: 16px;
-  transition: border-color 0.3s ease;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 15px;
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: #3498db;
-}
-
+/* Match Cards */
 .match-card {
-  border-left: 4px solid #3498db;
+  padding-left: 12px;
   cursor: pointer;
 }
 
 .match-card h3 {
-  color: #2c3e50;
-  margin-bottom: 10px;
+  font-size: 1.2rem;
+  margin-bottom: 6px;
 }
 
 .match-info {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .match-teams {
-  font-size: 1.2rem;
   font-weight: 600;
 }
 
 .match-venue {
-  color: #7f8c8d;
+  color: #777;
   font-style: italic;
 }
 
 .match-status {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 3px 8px;
+  border-radius: 12px;
 }
 
 .status-ongoing {
-  background-color: #d4edda;
-  color: #155724;
+  background: #e8f6ec;
+  color: #207544;
 }
 
 .status-completed {
-  background-color: #f8d7da;
-  color: #721c24;
+  background: #fdecea;
+  color: #a32d2d;
 }
 
+/* Commentary */
 .commentary-item {
   border-bottom: 1px solid #eee;
-  padding: 15px 0;
+  padding: 12px 0;
 }
 
 .commentary-item:last-child {
@@ -169,103 +152,76 @@ body {
 .commentary-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .ball-info {
   font-weight: 600;
-  color: #2c3e50;
 }
 
 .event-type {
-  padding: 4px 8px;
+  padding: 2px 6px;
   border-radius: 4px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
 }
 
 .event-run {
-  background-color: #d4edda;
-  color: #155724;
+  background: #e8f6ec;
+  color: #207544;
 }
-
 .event-wicket {
-  background-color: #f8d7da;
-  color: #721c24;
+  background: #fdecea;
+  color: #a32d2d;
 }
-
 .event-wide {
-  background-color: #fff3cd;
-  color: #856404;
+  background: #fff8e1;
+  color: #8a6d3b;
 }
-
 .event-boundary {
-  background-color: #cce5ff;
-  color: #004085;
+  background: #e6f0ff;
+  color: #1a3d7c;
 }
-
 .event-six {
-  background-color: #e2e3e5;
-  color: #383d41;
+  background: #f0f0f0;
+  color: #444;
 }
 
 .commentary-description {
-  color: #555;
-  line-height: 1.5;
+  color: #444;
 }
 
 .commentary-meta {
-  font-size: 0.9rem;
-  color: #7f8c8d;
-  margin-top: 5px;
+  font-size: 0.85rem;
+  color: #777;
+  margin-top: 4px;
 }
 
-.loading {
+/* States */
+.loading,
+.error,
+.success {
+  padding: 12px;
+  border-radius: 4px;
   text-align: center;
-  padding: 40px;
-  color: #7f8c8d;
+  margin-bottom: 16px;
 }
 
 .error {
-  background-color: #f8d7da;
-  color: #721c24;
-  padding: 15px;
-  border-radius: 6px;
-  margin-bottom: 20px;
+  background: #fdecea;
+  color: #a32d2d;
 }
-
 .success {
-  background-color: #d4edda;
-  color: #155724;
-  padding: 15px;
-  border-radius: 6px;
-  margin-bottom: 20px;
+  background: #e8f6ec;
+  color: #207544;
+}
+.loading {
+  color: #777;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 10px;
-  }
-
-  .header h1 {
-    font-size: 2rem;
-  }
-
-  .match-info {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .commentary-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }

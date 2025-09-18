@@ -1,8 +1,9 @@
+'use client'
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 
-const API_BASE_URL = 'http://localhost:2999';
 
 export default function Home() {
     const [matches, setMatches] = useState([]);
@@ -22,7 +23,7 @@ export default function Home() {
     const fetchMatches = async () => {
         try {
             setLoading(true);
-            const response = await axios.get(`${API_BASE_URL}/matches`);
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/matches`);
             setMatches(response.data.matches);
             setError(null);
         } catch (err) {
@@ -36,7 +37,7 @@ export default function Home() {
     const handleStartMatch = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${API_BASE_URL}/matches/start`, newMatch);
+            const response = await axios.post(`${NEXT_PUBLIC_API_BASE_URL}/matches/start`, newMatch);
             setMatches([response.data.match, ...matches]);
             setNewMatch({ team1: '', team2: '', venue: '' });
             setShowStartMatchForm(false);
@@ -54,7 +55,7 @@ export default function Home() {
         return (
             <div className="container">
                 <div className="header">
-                    <h1>🏏 Cricket Scoring App</h1>
+                    <h1>Cricket Scoring App</h1>
                 </div>
                 <div className="loading">Loading matches...</div>
             </div>
@@ -124,20 +125,20 @@ export default function Home() {
                 {matches.length === 0 ? (
                     <div className="loading">No matches found. Start a new match to begin!</div>
                 ) : (
-                    <div className="grid">
+                    <div className="col">
                         {matches.map((match) => (
                             <Link key={match.matchId} href={`/match/${match.matchId}`}>
                                 <div className="card match-card">
                                     <div className="match-info">
-                                        <div className="match-teams">
+                                        <div style={{ textDecoration: "underline", color: "black" }} className="match-teams">
                                             {match.team1} vs {match.team2}
                                         </div>
-                                        <div className={`match-status status-${match.status}`}>
+                                        <div style={{ textDecoration: "none" }} className={`match-status status-${match.status}`}>
                                             {match.status}
                                         </div>
                                     </div>
-                                    <div className="match-venue">📍 {match.venue}</div>
-                                    <div style={{ marginTop: '10px', fontSize: '0.9rem', color: '#7f8c8d' }}>
+                                    <div className="match-venue">{match.venue}</div>
+                                    <div style={{ marginTop: '10px', fontSize: '0.9rem', color: '#7f8c8d', textDecoration: "underline" }}>
                                         Match ID: {match.matchId} | Started: {formatDate(match.createdAt)}
                                     </div>
                                 </div>

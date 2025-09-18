@@ -1,20 +1,18 @@
+'use client'
+
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useParams } from 'next/navigation';
 import axios from 'axios';
 import { io } from 'socket.io-client';
 import Link from 'next/link';
 
-const API_BASE_URL = 'http://localhost:2999';
-const SOCKET_URL = 'http://localhost:2999';
-
 export default function MatchDetails() {
-    const router = useRouter();
-    const { id } = router.query;
+    const params = useParams();
+    const id = params.id;
     const [match, setMatch] = useState(null);
     const [commentary, setCommentary] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [socket, setSocket] = useState(null);
     const [showAddCommentaryForm, setShowAddCommentaryForm] = useState(false);
     const [newCommentary, setNewCommentary] = useState({
         over: '',
@@ -27,22 +25,21 @@ export default function MatchDetails() {
     });
 
     useEffect(() => {
-        if (id) {
-            fetchMatchDetails();
-            setupSocket();
-        }
+        if (!id) return;
+
+        const newSocket = setupSocket();
+        fetchMatchDetails();
 
         return () => {
-            if (socket) {
-                socket.disconnect();
-            }
+            newSocket.disconnect();
         };
     }, [id]);
+
 
     const fetchMatchDetails = async () => {
         try {
             setLoading(true);
-            const response = await axios.get(`${API_BASE_URL}/matches/${id}`);
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/matches/${id}`);
             setMatch(response.data.match);
             setCommentary(response.data.commentary);
             setError(null);
@@ -55,10 +52,10 @@ export default function MatchDetails() {
     };
 
     const setupSocket = () => {
-        const newSocket = io(SOCKET_URL);
+        const newSocket = io(process.env.NEXT_PUBLIC_SOCKET_URL);
 
         newSocket.on('connect', () => {
-            console.log('Connected to server');
+            console.log('Connected');
             newSocket.emit('joinMatch', parseInt(id));
         });
 
@@ -68,17 +65,14 @@ export default function MatchDetails() {
             }
         });
 
-        newSocket.on('disconnect', () => {
-            console.log('Disconnected from server');
-        });
-
-        setSocket(newSocket);
+        return newSocket;
     };
+
 
     const handleAddCommentary = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`${API_BASE_URL}/matches/${id}/commentary`, newCommentary);
+            await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/matches/${id}/commentary`, newCommentary);
             setNewCommentary({
                 over: '',
                 ball: '',
@@ -120,7 +114,7 @@ export default function MatchDetails() {
         return (
             <div className="container">
                 <div className="header">
-                    <h1>🏏 Cricket Scoring App</h1>
+                    <h1>Cricket Scoring App</h1>
                     <p>Real-time cricket scoreboard and commentary</p>
                 </div>
                 <div className="loading">Loading match details...</div>
@@ -132,7 +126,7 @@ export default function MatchDetails() {
         return (
             <div className="container">
                 <div className="header">
-                    <h1>🏏 Cricket Scoring App</h1>
+                    <h1>Cricket Scoring App</h1>
                     <p>Real-time cricket scoreboard and commentary</p>
                 </div>
                 <div className="error">{error || 'Match not found'}</div>
@@ -146,7 +140,7 @@ export default function MatchDetails() {
     return (
         <div className="container">
             <div className="header">
-                <h1>🏏 Cricket Scoring App</h1>
+                <h1>Cricket Scoring App</h1>
                 <p>Real-time cricket scoreboard and commentary</p>
             </div>
 
@@ -166,7 +160,7 @@ export default function MatchDetails() {
                         {match.status}
                     </div>
                 </div>
-                <div className="match-venue">📍 {match.venue}</div>
+                <div className="match-venue"> {match.venue}</div>
                 <div style={{ marginTop: '10px', fontSize: '0.9rem', color: '#7f8c8d' }}>
                     Match ID: {match.matchId} | Started: {formatDate(match.createdAt)}
                 </div>
