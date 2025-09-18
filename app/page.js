@@ -37,7 +37,7 @@ export default function Home() {
     const handleStartMatch = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${NEXT_PUBLIC_API_BASE_URL}/matches/start`, newMatch);
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/matches/start`, newMatch);
             setMatches([response.data.match, ...matches]);
             setNewMatch({ team1: '', team2: '', venue: '' });
             setShowStartMatchForm(false);
